@@ -58,6 +58,10 @@ export class {{classname}} {
                 if (response.status === 204) {
                     return undefined;
                 } else {
+                    if (response.headers.has('content-type') && 
+                    (response.headers.get('content-type').search('text/html') != -1|| 
+                    response.headers.get('content-type').search('text/plain') != -1)) 
+                        return response.text();
                     return response.json() || {};
                 }
             });
